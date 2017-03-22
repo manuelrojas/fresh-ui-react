@@ -18,6 +18,15 @@
   font-size: large;
 }
 
+/* Custom Styles */
+.Calendar-ui-input {
+  padding: 6px; 
+  border-radius: 2px;
+  background-color: #fff;
+  border: 1px solid #d3d6db;
+  font-size: 15px;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
