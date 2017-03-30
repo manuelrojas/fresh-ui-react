@@ -1,47 +1,45 @@
 import React from 'react'
-import moment from 'moment'
+
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 
 import DayPicker from "react-day-picker"
 import "react-day-picker/lib/style.css"
-import hapi from '../api'
+
+
+
+import * as actions from '../actions/HolidayActions'
 
 import {
   Columns,
   Column,
-  Notification,
+  Title,
 } from 're-bulma'
 
 
-export default class CalendarView extends React.Component {
+class CalendarView extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
             selectedDay: new Date(),
-            holidays: []
         }
+    }
 
-        hapi.getHolidays(this.props.country).then(response => {
-            let holidays = [];
-            Object.keys(response.data.holidays).map((_date, i)=> {
-                console.log(_date)
-                holidays.push(moment(_date).toDate());
-            });
-            this.setState({ holidays: holidays });
-        });
+    componentDidMount() {
+        this.props.callHapi(this.props.country);
     }
 
     render(){
         return (<Columns>
-                    
-                       {[1,2,3,4,5].map((i)=>{
-                         return(<Column>
+                       {[1,2,3].map((i)=>{
+                         return(<Column key={i}>
                             <DayPicker
                                 key={i}
                                 initialMonth={ new Date(2008, i) }
                                 canChangeMonth={false}
                                 modifiers={{ 
-                                    holiday: this.state.holidays,
+                                    holiday: this.props.holidays,
                                     weekends: day => day.getDay() === 0 || day.getDay() === 6, 
                             }}
                         />
@@ -53,3 +51,16 @@ export default class CalendarView extends React.Component {
     }
 
 }
+
+function mapStateToProps(state){
+    return {
+      holidays: state.holidays,
+      country: state.country
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CalendarView);
