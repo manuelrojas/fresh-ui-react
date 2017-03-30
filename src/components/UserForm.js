@@ -19,8 +19,11 @@ export default class UserForm extends React.Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
-            startDate: moment()
+            startDate: moment(),
+            number: 0,
+            code: '',
         }
     }
 
@@ -31,20 +34,25 @@ export default class UserForm extends React.Component {
        
     }
 
+    handleSubmit(event){
+        console.log(this.state)
+        event.preventDefault();
+    }
+
     render(){
         return (
             <Hero color="isLight">
                 <HeroBody>
                     <Container>
-                        <form>
+                        <form onSubmit={this.handleSubmit}>
                             <Group>
                                 <DatePicker
                                     selected={this.state.startDate}
                                     onChange={this.handleChange}
                                     className="Calendar-ui-input"
                                 />
-                                <Input type="number" placeholder="Number of Days" />
-                                <Input type="text" placeholder="Country Code" />    
+                                <Input type="number" onChange={ e => {this.setState({number: e.target.value})}} placeholder="Number of Days" />
+                                <Input type="text" onChange={ e => {this.setState({code: e.target.value})}} placeholder="Country Code" />    
                                 <Button color="isSuccess">Search</Button>
                             </Group>
                         </form>

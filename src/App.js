@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
-import hapi from './api'
+
 import UserForm from './components/UserForm'
+import CalendarView from './components/CalendarView'
 
 class App extends Component {
   render() {
-    hapi.getHolidays().then(response => {console.log(response.data.holidays)})
     return (
       <div className="App">
         <div className="App-header">
@@ -15,6 +15,7 @@ class App extends Component {
         </div>
         <div className="App-intro"> 
           <UserForm />
+          <CalendarView country='US'/>
         </div>
       </div>
     );

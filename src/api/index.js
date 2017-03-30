@@ -3,7 +3,6 @@ import axios from 'axios'
 const BASE_URL =  'https://holidayapi.com'
 const KEY =  '4d3e471a-7456-4c99-8670-eb9460fb3d3d'
 
-
 const instance = axios.create({
     baseURL: BASE_URL,
     params: {
@@ -13,8 +12,12 @@ const instance = axios.create({
     }
 })
 
-const getHolidays = () => {
-  return instance.get('v1/holidays');
+const getHolidays = (_country) => {
+  return instance.get('v1/holidays', {
+    params: {
+      country: _country
+    }
+  })
 }
 
 export default {

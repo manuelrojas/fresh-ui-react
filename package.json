@@ -10,6 +10,7 @@
     "re-bulma": "^0.3.2",
     "react": "^15.4.2",
     "react-datepicker": "^0.43.0",
+    "react-day-picker": "^5.2.0",
     "react-dom": "^15.4.2"
   },
   "devDependencies": {
