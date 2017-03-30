@@ -34,7 +34,7 @@ export default class CalendarView extends React.Component {
     render(){
         return (<Columns>
                     
-                       {[1,2,3].map((i)=>{
+                       {[1,2,3,4,5].map((i)=>{
                          return(<Column>
                             <DayPicker
                                 key={i}
